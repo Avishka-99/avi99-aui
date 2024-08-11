@@ -242,7 +242,7 @@ const ApppWrapper = () => {
       {/* <PortalProvider> */}
 
       <View>
-        <Text>Hello</Text>
+        <Text>Hellooo</Text>
       </View>
 
       {/* </PortalProvider> */}

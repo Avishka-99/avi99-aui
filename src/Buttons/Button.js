@@ -1,9 +1,35 @@
-import React, { useState, useRef, memo } from 'react';
+import React, { useState, useRef, memo, useEffect } from 'react';
 import { Pressable, Text, View, Animated } from 'react-native';
 const Button = ({ mode, onPress, title, color, background, rounded, outlineColor, width, ripple }) => {
     let buttonStyle = {};
     let titleStyle = {};
     const ripple_ = useRef(new Animated.Value(0)).current;
+    useEffect(() => {
+        if (mode == undefined) {
+            console.error('mode must be provided');
+            return;
+        }
+        if (onPress == undefined) {
+            console.error('onPress function must be provided');
+            return;
+        }
+        if (title == undefined) {
+            console.error('title must be provided');
+            return;
+        }
+        if (typeof mode != 'string') {
+            console.error('mode should be a string');
+            return;
+        }
+        if (typeof onPress != 'function') {
+            console.error('onPress should be a function');
+            return;
+        }
+        if (typeof title != 'string') {
+            console.error('title should be a string');
+            return;
+        }
+    }, []);
     const [translateValue, setTranslateValue] = useState({ x: 0, y: 0 });
     switch (mode) {
         case 'flat':

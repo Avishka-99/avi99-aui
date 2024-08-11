@@ -1,4 +1,4 @@
-import React, { useState, useRef, memo } from 'react'
+import React, { useState, useRef, memo, useEffect } from 'react'
 import { TextInput as TextBox, View, Animated, type ViewStyle, type ColorValue, Easing } from 'react-native'
 interface TextInputProps {
     placeholder: String,
@@ -15,6 +15,24 @@ const TextInput: React.FC<TextInputProps> = ({ placeholder, placeholderColor, te
     const [hasValue, setHasValue] = useState<Boolean>(false);
     const inputRef = useRef<TextBox>(null);
     const translation = useRef(new Animated.Value(0)).current;
+    useEffect(() => {
+        if (placeholder == undefined) {
+            console.error('placeholder must be provided');
+            return;
+        }
+        if (typeof placeholder != 'string') {
+            console.error('placeholder should be string');
+            return;
+        }
+        if (onChange == undefined) {
+            console.error('onChange must be provided');
+            return;
+        }
+        if (typeof onChange != 'function') {
+            console.error('onChange should be a function');
+            return;
+        }
+    }, [])
     const onFocus = () => {
         Animated.timing(translation, {
             toValue: 1,

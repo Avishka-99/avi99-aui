@@ -1,4 +1,4 @@
-import React, { useState, useRef, memo } from 'react';
+import React, { useState, useRef, memo, useEffect } from 'react';
 import { Pressable, Text, View, Animated } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 const IconButton = ({ onPress, title, color, background, rounded, reversed, width, ripple, icon, outlined }) => {
@@ -7,35 +7,32 @@ const IconButton = ({ onPress, title, color, background, rounded, reversed, widt
     let iconColor;
     const rippleValue = useRef(new Animated.Value(0)).current;
     const [translateValue, setTranslateValue] = useState({ x: 0, y: 0 });
-    // switch (mode) {
-    //     case 'flat':
-    //         buttonStyle = {
-    //             ...buttonStyle, backgroundColor: background ? background : 'dodgerblue', borderWidth: 2, borderColor: outlineColor ? outlineColor : background ? background : 'dodgerblue', minWidth: width ? width : 0,
-    //             padding: 5
-    //         };
-    //         titleStyle = { color: color ? color : 'white', fontWeight: '600' };
-    //         break;
-    //     case 'outlined':
-    //         buttonStyle = { ...buttonStyle, borderWidth: 2, borderColor: color ? color : 'black' };
-    //         titleStyle = { color: color ? color : 'black', fontWeight: '600' };
-    //         break;
-    //     case 'text':
-    //         titleStyle = { color: color ? color : 'black', fontWeight: '600' };
-    //         break;
-    //     case 'ripple':
-    //         titleStyle = { color: color ? color : 'black', fontWeight: '600' };
-    //         buttonStyle = { ...buttonStyle, backgroundColor: background ? background : 'dodgerblue' }
-    //         rippleStyle = {
-    //             transform: [
-    //                 { translateX: 0 },
-    //                 { translateY: 0 }
-    //             ]
-    //         }
-    //         break;
-    //     default:
-    //         buttonStyle = { backgroundColor: 'blue' };
-    //         break;
-    // }
+    useEffect(() => {
+        if (icon == undefined) {
+            console.error('icon must be provided');
+            return;
+        }
+        if (onPress == undefined) {
+            console.error('onPress function must be provided');
+            return;
+        }
+        if (title == undefined) {
+            console.error('title must be provided');
+            return;
+        }
+        if (typeof icon != 'string') {
+            console.error('icon should be a string');
+            return;
+        }
+        if (typeof onPress != 'function') {
+            console.error('onPress should be a function');
+            return;
+        }
+        if (typeof title != 'string') {
+            console.error('title should be a string');
+            return;
+        }
+    }, []);
     if (outlined) {
         if (color) {
             buttonStyle = { backgroundColor: 'white', flexDirection: reversed ? 'row-reverse' : 'row', borderRadius: rounded ? 35 : 5, borderWidth: 3, borderColor: color };

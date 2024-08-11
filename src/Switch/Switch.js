@@ -4,6 +4,14 @@ const Switch = ({ value, onChange, color }) => {
     const toggle = useRef(new Animated.Value(0)).current;
     const [isToggle, setIsToggle] = useState(false);
     useEffect(() => {
+        if (value == undefined) {
+            console.error('value must be provided');
+            return;
+        }
+        if (typeof value !== 'boolean') {
+            console.error('value must be a boolean');
+            return;
+        }
         toggle.setValue(value ? 1 : 0);
         setIsToggle(value);
     }, []);

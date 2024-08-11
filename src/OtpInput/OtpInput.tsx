@@ -1,4 +1,4 @@
-import React, { memo, useRef, useState } from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
 import { Pressable, View, TextInput, type ViewStyle } from 'react-native';
 import OtpBox from './OtpBox';
 interface OtpProps {
@@ -34,6 +34,24 @@ const otpContainer: ViewStyle = {
 const OtpInput: React.FC<OtpProps> = ({ length, onChange, onComplete }) => {
     const [otp, setOtp] = useState<string[]>(Array(length).fill(''));
     const inputRef = useRef<TextInput>(null);
+    useEffect(() => {
+        if (length == undefined) {
+            console.error('icon must be provided');
+            return;
+        }
+        if (onChange == undefined) {
+            console.error('onPress function must be provided');
+            return;
+        }
+        if (typeof length != 'number') {
+            console.error('length should be a number');
+            return;
+        }
+        if (typeof onChange != 'function') {
+            console.error('onChange should be a function');
+            return;
+        }
+    }, [])
     const onChangeText = (text: string) => {
         const otpArray: string[] = Array.from(text);
         if (otpArray.length >= length) {

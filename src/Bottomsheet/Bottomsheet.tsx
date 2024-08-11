@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle, useRef, useState } from "react";
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { TouchableWithoutFeedback, Dimensions, type DimensionValue, StyleSheet, Animated, View, StatusBar, type ColorValue } from "react-native";
 export interface SheetRef {
     open: () => void;
@@ -14,6 +14,29 @@ interface BottomsheetProps {
 
 }
 const Bottomsheet = forwardRef<SheetRef, BottomsheetProps>(({ children, height, close, backdropColor }, ref) => {
+    useEffect(() => {
+        if (height == undefined) {
+            console.error('height must be provided');
+            return;
+        }
+        if (children == undefined) {
+            console.error('childern must be provided');
+            return;
+        }
+        if (close == undefined) {
+            console.error('close function must be provided');
+            return;
+        }
+        if (ref == undefined) {
+            console.error('reference must be provided');
+            return;
+        }
+        if (typeof close != 'function') {
+            console.error('close shound be a function');
+            return;
+        }
+
+    }, [])
     const screenHeight = Dimensions.get('window').height
     const [open, setOpen] = useState(false);
     const style = StyleSheet.create({

@@ -10,6 +10,10 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ value, color, width, height }
     const progress = useRef(new Animated.Value(0)).current;
     const [containerHeight, setContainerHeight] = useState<number>(0);
     useEffect(() => {
+        if (typeof value !== 'number' || value < 0 || value > 100) {
+            console.error('value is required and must be a number between 0 and 100.');
+            return;
+        }
         const animation = Animated.parallel([
             Animated.timing(progress, {
                 toValue: value < 100 ? value : 100,

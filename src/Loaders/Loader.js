@@ -1,8 +1,18 @@
-import React, { useRef, memo } from 'react';
+import React, { useRef, memo, useEffect } from 'react';
 import { View, Animated, Easing } from 'react-native';
 import { LOADER_DEFAULT_COLOR, LOADER_HEIGHT } from '../utils/Constants';
 const height = LOADER_HEIGHT;
 const Loader = ({ name, color, duration }) => {
+    useEffect(() => {
+        if (name == undefined) {
+            console.error('name must be provided');
+            return;
+        }
+        if (typeof name != 'string') {
+            console.error('name should be a string');
+            return;
+        }
+    }, []);
     const firstCircle = useRef(new Animated.Value(0)).current;
     const secondCircle = useRef(new Animated.Value(0)).current;
     const thirdCircle = useRef(new Animated.Value(0)).current;

@@ -1,4 +1,4 @@
-import React, { useRef, memo } from 'react';
+import React, { useRef, memo, useEffect } from 'react';
 import { View, Animated, type ViewStyle, type ColorValue, Easing } from 'react-native';
 import { LOADER_DEFAULT_COLOR, LOADER_HEIGHT } from '../utils/Constants';
 interface LoaderProps {
@@ -10,6 +10,16 @@ interface LoaderProps {
 const height = LOADER_HEIGHT;
 
 const Loader: React.FC<LoaderProps> = ({ name, color, duration }) => {
+    useEffect(() => {
+        if (name == undefined) {
+            console.error('name must be provided');
+            return;
+        }
+        if (typeof name != 'string') {
+            console.error('name should be a string');
+            return;
+        }
+    }, [])
     const firstCircle = useRef(new Animated.Value(0)).current
     const secondCircle = useRef(new Animated.Value(0)).current
     const thirdCircle = useRef(new Animated.Value(0)).current

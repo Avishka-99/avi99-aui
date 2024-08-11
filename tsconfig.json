@@ -13,6 +13,8 @@
     "module": "esnext",
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
+    "declaration": true,
+    "declarationDir": "./src/dist/types",
     "noImplicitReturns": true,
     "noImplicitUseStrict": false,
     "noStrictGenericChecks": false,

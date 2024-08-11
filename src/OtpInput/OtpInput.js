@@ -25,7 +25,7 @@ const OtpInput = ({ length, onChange, onComplete }) => {
     const inputRef = useRef(null);
     useEffect(() => {
         if (length == undefined) {
-            console.error('icon must be provided');
+            console.error('length must be provided');
             return;
         }
         if (onChange == undefined) {

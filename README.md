@@ -193,6 +193,8 @@ export fuction App(){
 
 ## Bottomsheet
 
+###### current version does not support pan gestures yet.
+
 ```js
 import { BottomSheet,type SheetRef,Button } from '@avi99/aui';
 

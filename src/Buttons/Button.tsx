@@ -67,7 +67,6 @@ const Button: React.FC<ButtonProps> = ({ mode, onPress, title, color, background
                 ]}
                 onPress={(event) => {
                     onPress();
-                    console.log(event.nativeEvent)
                     setTranslateValue({ x: event.nativeEvent.locationX, y: event.nativeEvent.locationY })
                     Animated.parallel([
                         Animated.sequence([
@@ -90,7 +89,6 @@ const Button: React.FC<ButtonProps> = ({ mode, onPress, title, color, background
                 }}
                 onLongPress={(event) => {
                     onPress();
-                    console.log(event.nativeEvent)
                     setTranslateValue({ x: event.nativeEvent.locationX, y: event.nativeEvent.locationY })
                     Animated.parallel([
                         Animated.sequence([

@@ -43,7 +43,6 @@ const Button = ({ mode, onPress, title, color, background, rounded, outlineColor
                 buttonStyle
             ], onPress: (event) => {
                 onPress();
-                console.log(event.nativeEvent);
                 setTranslateValue({ x: event.nativeEvent.locationX, y: event.nativeEvent.locationY });
                 Animated.parallel([
                     Animated.sequence([
@@ -61,7 +60,6 @@ const Button = ({ mode, onPress, title, color, background, rounded, outlineColor
                 ]).start();
             }, onLongPress: (event) => {
                 onPress();
-                console.log(event.nativeEvent);
                 setTranslateValue({ x: event.nativeEvent.locationX, y: event.nativeEvent.locationY });
                 Animated.parallel([
                     Animated.sequence([

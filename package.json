@@ -50,7 +50,8 @@
   },
   "homepage": "https://github.com/Avishka-99/avi99-aui#readme",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^17.0.2",

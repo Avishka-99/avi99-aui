@@ -623,7 +623,7 @@ const Loader: React.FC<LoaderProps> = ({ name, color, duration }) => {
                 backgroundColor: 'transparent',
                 borderTopColor: color ? color : LOADER_DEFAULT_COLOR,
                 borderLeftColor: 'transparent',
-                borderRightColor: 'white',
+                borderRightColor: 'transparent',
                 borderBottomColor: color ? color : LOADER_DEFAULT_COLOR,
             }
             Animated.loop(Animated.parallel([

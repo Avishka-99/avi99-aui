@@ -1,6 +1,6 @@
 import React, { useState, useRef, memo, useEffect } from 'react';
 import { Pressable, Text, View, Animated } from 'react-native';
-const Button = ({ mode, onPress, title, color, background, rounded, outlineColor, width, ripple }) => {
+const Button = ({ mode, onPress, title, color, background, rounded, outlineColor, width, ripple, rippleColor }) => {
     let buttonStyle = {};
     let titleStyle = {};
     const ripple_ = useRef(new Animated.Value(0)).current;
@@ -40,7 +40,7 @@ const Button = ({ mode, onPress, title, color, background, rounded, outlineColor
             titleStyle = { color: color ? color : 'white' };
             break;
         case 'outlined':
-            buttonStyle = { ...buttonStyle, borderWidth: 3, borderColor: color ? color : 'royalblue', backgroundColor: background ? background : 'dodgerblue' };
+            buttonStyle = { ...buttonStyle, borderWidth: 3, borderColor: outlineColor ? outlineColor : 'royalblue', backgroundColor: background ? background : 'dodgerblue' };
             titleStyle = { color: color ? color : 'white' };
             break;
         case 'text':
@@ -108,7 +108,7 @@ const Button = ({ mode, onPress, title, color, background, rounded, outlineColor
                         width: 1,
                         height: 1,
                         borderRadius: 1,
-                        backgroundColor: 'white',
+                        backgroundColor: rippleColor ? rippleColor : 'white',
                         position: 'absolute',
                         transform: [
                             { translateX: translateValue.x },

@@ -10,6 +10,7 @@ interface ButtonProps {
     background?: ColorValue;
     rounded?: Boolean;
     ripple?: Boolean;
+    rippleColor?: ColorValue;
 }
 declare const _default: React.NamedExoticComponent<ButtonProps>;
 export default _default;

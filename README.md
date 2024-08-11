@@ -8,7 +8,11 @@ A minimal ui library for react native
 npm install @avi99/aui
 ```
 
-# 2.Usage
+# 2. Example
+
+See exaple from [here](https://snack.expo.dev/@avishka99/github.com-avishka-99-aui-example)
+
+# 3.Usage
 
 ```js
 import { Button } from '@avi99/aui';
@@ -25,10 +29,9 @@ const MyButton = () => {
 }
 ```
 
-# 3.Components
+# 4.Components
 
 ## Button
-
 
 ```js
 import { Button } from '@avi99/aui';
@@ -56,6 +59,7 @@ export fuction App(){
 | width        | false    | DimensionValue | width of button                                                                 |
 | rounded      | false    | Boolean        | if true, button corners will be rounded                                         |
 | ripple       | false    | Boolean        | enables ripple effect when user press the button                                |
+| rippleColor  | false    | ColorValue     | ripple color.                                                                   |
 
 ## Loader
 
@@ -188,6 +192,8 @@ export fuction App(){
 | placeholderColor | fasle    | ColorValue | color of placeholder text. default -> '#000000'                        |
 
 ## Bottomsheet
+
+###### current version does not support pan gestures yet.
 
 ```js
 import { BottomSheet,type SheetRef,Button } from '@avi99/aui';

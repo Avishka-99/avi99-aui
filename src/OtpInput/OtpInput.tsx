@@ -36,7 +36,7 @@ const OtpInput: React.FC<OtpProps> = ({ length, onChange, onComplete }) => {
     const inputRef = useRef<TextInput>(null);
     useEffect(() => {
         if (length == undefined) {
-            console.error('icon must be provided');
+            console.error('length must be provided');
             return;
         }
         if (onChange == undefined) {

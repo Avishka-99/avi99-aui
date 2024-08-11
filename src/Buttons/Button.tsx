@@ -10,43 +10,42 @@ interface ButtonProps {
     background?: ColorValue;
     rounded?: Boolean;
     ripple?: Boolean;
-
-
+    rippleColor?: ColorValue;
 }
 interface RippleTranslation {
     x: any,
     y: any,
 }
-const Button: React.FC<ButtonProps> = ({ mode, onPress, title, color, background, rounded, outlineColor, width, ripple }) => {
+const Button: React.FC<ButtonProps> = ({ mode, onPress, title, color, background, rounded, outlineColor, width, ripple, rippleColor }) => {
     let buttonStyle: ViewStyle = {};
     let titleStyle: TextStyle = {};
     const ripple_ = useRef(new Animated.Value(0)).current
-    useEffect(()=>{
-        if ( mode == undefined) {
+    useEffect(() => {
+        if (mode == undefined) {
             console.error('mode must be provided');
             return;
         }
-        if (onPress == undefined){
+        if (onPress == undefined) {
             console.error('onPress function must be provided');
-            return; 
+            return;
         }
-        if (title == undefined){
+        if (title == undefined) {
             console.error('title must be provided');
-            return; 
+            return;
         }
-        if(typeof mode !='string'){
+        if (typeof mode != 'string') {
             console.error('mode should be a string');
-            return; 
+            return;
         }
-        if(typeof onPress !='function'){
+        if (typeof onPress != 'function') {
             console.error('onPress should be a function');
-            return; 
+            return;
         }
-        if(typeof title !='string'){
+        if (typeof title != 'string') {
             console.error('title should be a string');
-            return; 
+            return;
         }
-    },[])
+    }, [])
     const [translateValue, setTranslateValue] = useState<RippleTranslation>({ x: 0, y: 0 });
     switch (mode) {
         case 'flat':
@@ -58,7 +57,7 @@ const Button: React.FC<ButtonProps> = ({ mode, onPress, title, color, background
             titleStyle = { color: color ? color : 'white' };
             break;
         case 'outlined':
-            buttonStyle = { ...buttonStyle, borderWidth: 3, borderColor: color ? color : 'royalblue', backgroundColor: background ? background : 'dodgerblue' };
+            buttonStyle = { ...buttonStyle, borderWidth: 3, borderColor: outlineColor ? outlineColor : 'royalblue', backgroundColor: background ? background : 'dodgerblue' };
             titleStyle = { color: color ? color : 'white' };
             break;
         case 'text':
@@ -144,7 +143,7 @@ const Button: React.FC<ButtonProps> = ({ mode, onPress, title, color, background
                     width: 1,
                     height: 1,
                     borderRadius: 1,
-                    backgroundColor: 'white',
+                    backgroundColor: rippleColor ? rippleColor : 'white',
                     position: 'absolute',
                     transform: [
                         { translateX: translateValue.x },

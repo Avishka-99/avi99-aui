@@ -1,9 +1,11 @@
 name: Node.js Package
 
 on:
-  push:
+  pull_request:
     branches:
-      main
+      - main
+    types:
+      - closed
 
 jobs:
   build:

@@ -5,19 +5,18 @@ interface OtpProps {
     length: number,
     onChange: (text: String) => void,
     onComplete?: (text: String) => void,
+    containerStyle?: ViewStyle;
+    boxStyle?: ViewStyle;
 }
 
-const containerStyle: ViewStyle = {
+let backgroundStyle: ViewStyle = {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-    height: 60,
     alignItems: 'center',
-    backgroundColor: 'red'
 
 }
 const otpContainer: ViewStyle = {
-    height: 60,
     width: '100%',
     zIndex: 2,
     position: 'absolute',
@@ -31,7 +30,7 @@ const otpContainer: ViewStyle = {
 
 
 
-const OtpInput: React.FC<OtpProps> = ({ length, onChange, onComplete }) => {
+const OtpInput: React.FC<OtpProps> = ({ length, onChange, onComplete, containerStyle, boxStyle }) => {
     const [otp, setOtp] = useState<string[]>(Array(length).fill(''));
     const inputRef = useRef<TextInput>(null);
     useEffect(() => {
@@ -79,13 +78,16 @@ const OtpInput: React.FC<OtpProps> = ({ length, onChange, onComplete }) => {
         }
 
     }
+    if (containerStyle) {
+        backgroundStyle = { ...backgroundStyle, ...containerStyle }
+    }
     return (
-        <Pressable style={containerStyle} onPress={focusTextInput} >
+        <Pressable style={backgroundStyle} onPress={focusTextInput} >
             <TextInput ref={inputRef} onChangeText={onChangeText} style={{ zIndex: 1, flex: 1, height: 60 }} cursorColor={'red'} maxLength={length} keyboardType='phone-pad' />
             <View style={otpContainer}>
                 <View style={{ display: 'flex', flexDirection: 'row' }}>
                     {Array(length).fill(0).map((_, index) => (
-                        <OtpBox key={index} digit={otp[index]} index={index} length={length} active={otp.indexOf('') == index ? true : false} />
+                        <OtpBox key={index} digit={otp[index]} index={index} length={length} active={otp.indexOf('') == index ? true : false} boxStyle={boxStyle} />
                     ))}
                 </View>
             </View>

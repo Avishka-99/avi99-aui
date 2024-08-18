@@ -1,8 +1,10 @@
 import React, { useState, useRef, memo, useEffect } from 'react';
 import { Pressable, Text, View, Animated } from 'react-native';
-const Button = ({ mode, onPress, title, color, background, rounded, outlineColor, width, ripple, rippleColor }) => {
+import { BUTTON_DEFAULT_HEIGHT } from '../utils/Constants';
+const Button = ({ mode, onPress, title, color, background, rounded, outlineColor, ripple, rippleColor, containerStyle }) => {
     let buttonStyle = {};
     let titleStyle = {};
+    let backgroundStyle = {};
     const ripple_ = useRef(new Animated.Value(0)).current;
     useEffect(() => {
         if (mode == undefined) {
@@ -34,39 +36,39 @@ const Button = ({ mode, onPress, title, color, background, rounded, outlineColor
     switch (mode) {
         case 'flat':
             buttonStyle = {
-                ...buttonStyle, backgroundColor: background ? background : 'dodgerblue', borderWidth: 2, borderColor: outlineColor ? outlineColor : background ? background : 'dodgerblue', minWidth: width ? width : 0,
-                padding: 5
+                ...buttonStyle, backgroundColor: background ? background : 'dodgerblue', borderWidth: 2, borderColor: outlineColor ? outlineColor : background ? background : 'dodgerblue',
+                paddingLeft: 10, paddingRight: 10
             };
-            titleStyle = { color: color ? color : 'white' };
+            titleStyle = { color: color ? color : 'white', fontWeight: '700' };
             break;
         case 'outlined':
             buttonStyle = { ...buttonStyle, borderWidth: 3, borderColor: outlineColor ? outlineColor : 'royalblue', backgroundColor: background ? background : 'dodgerblue' };
-            titleStyle = { color: color ? color : 'white' };
+            titleStyle = { color: color ? color : 'white', fontWeight: '700' };
             break;
         case 'text':
-            titleStyle = { color: color ? color : 'white' };
+            titleStyle = { color: color ? color : 'white', fontWeight: '700' };
             break;
         default:
             buttonStyle = { backgroundColor: 'dodgerblue' };
             break;
     }
-    if (width) {
-        buttonStyle = { ...buttonStyle, width: width };
+    if (containerStyle) {
+        backgroundStyle = containerStyle;
     }
     if (!ripple) {
-        return (React.createElement(Pressable, { style: [{ padding: 10, borderRadius: rounded ? 35 : 5, height: 38, display: 'flex', alignItems: 'center', justifyContent: 'center' }, buttonStyle], onPress: onPress },
+        return (React.createElement(Pressable, { style: [{ borderRadius: rounded ? BUTTON_DEFAULT_HEIGHT : 5, height: BUTTON_DEFAULT_HEIGHT, display: 'flex', alignItems: 'center', justifyContent: 'center' }, buttonStyle, backgroundStyle], onPress: onPress },
             React.createElement(Text, { style: titleStyle }, title)));
     }
     else if (ripple) {
         return (React.createElement(Pressable, { style: [
                 {
-                    padding: 10,
-                    borderRadius: rounded ? 35 : 5,
-                    height: 38,
+                    borderRadius: rounded ? BUTTON_DEFAULT_HEIGHT : 5,
+                    height: BUTTON_DEFAULT_HEIGHT,
                     overflow: 'hidden',
                     display: 'flex',
                 },
-                buttonStyle
+                buttonStyle,
+                backgroundStyle
             ], onPress: (event) => {
                 onPress();
                 setTranslateValue({ x: event.nativeEvent.locationX, y: event.nativeEvent.locationY });

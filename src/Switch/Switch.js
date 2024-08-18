@@ -1,8 +1,9 @@
 import React, { useRef, useEffect, memo, useState } from 'react';
 import { Animated, Easing, Pressable } from 'react-native';
-const Switch = ({ value, onChange, color }) => {
+const Switch = ({ value, onChange, color, containerStyle }) => {
     const toggle = useRef(new Animated.Value(0)).current;
     const [isToggle, setIsToggle] = useState(false);
+    let backgroundStyle = {};
     useEffect(() => {
         if (value == undefined) {
             console.error('value must be provided');
@@ -25,9 +26,12 @@ const Switch = ({ value, onChange, color }) => {
                 useNativeDriver: true,
             })]).start();
     };
+    if (containerStyle) {
+        backgroundStyle = { ...backgroundStyle, ...containerStyle };
+    }
     return (React.createElement(Pressable, { onPress: () => {
             movetoggle();
-        } },
+        }, style: backgroundStyle },
         React.createElement(Animated.View, { style: [{
                     width: 50, height: 30, backgroundColor: toggle.interpolate({
                         inputRange: Array(2).fill(0).map((_, index) => index),

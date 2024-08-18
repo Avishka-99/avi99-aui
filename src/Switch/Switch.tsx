@@ -1,13 +1,15 @@
 import React, { useRef, useEffect, memo, useState } from 'react';
-import { Animated, Easing, Pressable } from 'react-native';
+import { Animated, Easing, Pressable, type ViewStyle } from 'react-native';
 interface SwitchProps {
     value: Boolean,
     onChange: (value: Boolean) => void,
-    color?: string
+    color?: string,
+    containerStyle?: ViewStyle;
 }
-const Switch: React.FC<SwitchProps> = ({ value, onChange, color }) => {
+const Switch: React.FC<SwitchProps> = ({ value, onChange, color, containerStyle }) => {
     const toggle = useRef(new Animated.Value(0)).current
     const [isToggle, setIsToggle] = useState<Boolean>(false);
+    let backgroundStyle: ViewStyle = {};
     useEffect(() => {
         if (value == undefined) {
             console.error('value must be provided');
@@ -33,11 +35,16 @@ const Switch: React.FC<SwitchProps> = ({ value, onChange, color }) => {
         ).start()
 
     }
+    if (containerStyle) {
+        backgroundStyle = { ...backgroundStyle, ...containerStyle };
+    }
     return (
         <Pressable onPress={() => {
             movetoggle();
 
-        }}>
+        }}
+            style={backgroundStyle}
+        >
             <Animated.View style={[{
                 width: 50, height: 30, backgroundColor: toggle.interpolate({
                     inputRange: Array(2).fill(0).map((_, index) => index),

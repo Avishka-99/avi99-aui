@@ -1,16 +1,13 @@
 import React, { memo, useEffect, useRef, useState } from 'react';
 import { Pressable, View, TextInput } from 'react-native';
 import OtpBox from './OtpBox';
-const containerStyle = {
+let backgroundStyle = {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-    height: 60,
     alignItems: 'center',
-    backgroundColor: 'red'
 };
 const otpContainer = {
-    height: 60,
     width: '100%',
     zIndex: 2,
     position: 'absolute',
@@ -20,7 +17,7 @@ const otpContainer = {
     justifyContent: 'center',
     backgroundColor: 'white'
 };
-const OtpInput = ({ length, onChange, onComplete }) => {
+const OtpInput = ({ length, onChange, onComplete, containerStyle, boxStyle }) => {
     const [otp, setOtp] = useState(Array(length).fill(''));
     const inputRef = useRef(null);
     useEffect(() => {
@@ -67,9 +64,12 @@ const OtpInput = ({ length, onChange, onComplete }) => {
             inputRef.current?.focus();
         }
     };
-    return (React.createElement(Pressable, { style: containerStyle, onPress: focusTextInput },
+    if (containerStyle) {
+        backgroundStyle = { ...backgroundStyle, ...containerStyle };
+    }
+    return (React.createElement(Pressable, { style: backgroundStyle, onPress: focusTextInput },
         React.createElement(TextInput, { ref: inputRef, onChangeText: onChangeText, style: { zIndex: 1, flex: 1, height: 60 }, cursorColor: 'red', maxLength: length, keyboardType: 'phone-pad' }),
         React.createElement(View, { style: otpContainer },
-            React.createElement(View, { style: { display: 'flex', flexDirection: 'row' } }, Array(length).fill(0).map((_, index) => (React.createElement(OtpBox, { key: index, digit: otp[index], index: index, length: length, active: otp.indexOf('') == index ? true : false })))))));
+            React.createElement(View, { style: { display: 'flex', flexDirection: 'row' } }, Array(length).fill(0).map((_, index) => (React.createElement(OtpBox, { key: index, digit: otp[index], index: index, length: length, active: otp.indexOf('') == index ? true : false, boxStyle: boxStyle })))))));
 };
 export default memo(OtpInput);

@@ -1,9 +1,10 @@
 import React, { useState, useRef, memo, useEffect } from 'react';
 import { TextInput as TextBox, View, Animated, Easing } from 'react-native';
-const TextInput = ({ placeholder, placeholderColor, textColor, outlineColor, disabled, onChange, secured }) => {
+const TextInput = ({ placeholder, placeholderColor, textColor, outlineColor, disabled, onChange, secured, containerStyle }) => {
     const [hasValue, setHasValue] = useState(false);
     const inputRef = useRef(null);
     const translation = useRef(new Animated.Value(0)).current;
+    let backgroundStyle = {};
     useEffect(() => {
         if (placeholder == undefined) {
             console.error('placeholder must be provided');
@@ -63,7 +64,10 @@ const TextInput = ({ placeholder, placeholderColor, textColor, outlineColor, dis
         zIndex: 1,
         pointerEvents: 'none',
     };
-    return (React.createElement(View, { style: { paddingTop: 10, backgroundColor: 'transparent' } },
+    if (containerStyle) {
+        backgroundStyle = { ...backgroundStyle, ...containerStyle };
+    }
+    return (React.createElement(View, { style: [{ paddingTop: 10, backgroundColor: 'transparent' }, backgroundStyle] },
         React.createElement(Animated.Text, { style: [{ fontWeight: '600' }, { color: placeholderColor ? placeholderColor : 'black' }, placeholderStyle] }, placeholder),
         React.createElement(TextBox, { style: [{ borderWidth: 1, padding: 13, borderRadius: 5, backgroundColor: 'white', color: textColor ? textColor : 'black', borderColor: outlineColor ? outlineColor : 'black' }], onFocus: onFocus, onBlur: onBlur, ref: inputRef, onChangeText: setText, secureTextEntry: secured ? secured : false, editable: disabled ? false : true, selectTextOnFocus: disabled ? false : true })));
 };

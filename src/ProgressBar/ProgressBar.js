@@ -1,8 +1,9 @@
 import React, { useRef, useEffect, memo, useState } from 'react';
 import { Animated, Easing, View } from 'react-native';
-const ProgressBar = ({ value, color, width, height }) => {
+const ProgressBar = ({ value, color, width, height, containerStyle }) => {
     const progress = useRef(new Animated.Value(0)).current;
     const [containerHeight, setContainerHeight] = useState(0);
+    let backgroundStyle = {};
     useEffect(() => {
         if (typeof value !== 'number' || value < 0) {
             console.error('value is required and must be a number between 0 and 100.');
@@ -21,10 +22,13 @@ const ProgressBar = ({ value, color, width, height }) => {
             animation.stop();
         };
     }, [value]);
-    return (React.createElement(View, { style: {
-            width: width ? width : '100%',
-            height: height ? height : 8,
-        }, onLayout: ({ nativeEvent: LayoutEvent }) => {
+    if (containerStyle) {
+        backgroundStyle = { ...backgroundStyle, ...containerStyle };
+    }
+    return (React.createElement(View, { style: [{
+                width: width ? width : '100%',
+                height: height ? height : 8,
+            }, backgroundStyle], onLayout: ({ nativeEvent: LayoutEvent }) => {
             setContainerHeight(LayoutEvent.layout.height);
         } },
         React.createElement(View, { style: { width: `100%`, height: '100%', overflow: 'hidden', borderRadius: containerHeight } },

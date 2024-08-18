@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Switch } from '@avi99/aui';
+import { Button } from 'react-native-paper';
+import { IconButton, Button as But, OtpInput } from '@avi99/aui';
 // function App() {
 //   // const sheetRef = React.useRef<SheetRef>(null);
 //   // const openSheet = () => {
@@ -227,6 +229,10 @@ const ApppWrapper = () => {
     const [value, setValue] = React.useState(true);
     return (React.createElement(React.Fragment, null,
         React.createElement(View, { style: { display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 1 } },
-            React.createElement(Switch, { value: value, onChange: () => setValue(!value) }))));
+            React.createElement(Switch, { value: value, onChange: () => setValue(!value) }),
+            React.createElement(Button, { icon: "camera", mode: "contained", onPress: () => console.log('Pressed'), style: { width: 160 } }, "Press me"),
+            React.createElement(IconButton, { icon: 'home', onPress: () => console.log("pressed"), title: "Press me", rounded: true, ripple: true }),
+            React.createElement(But, { mode: 'flat', onPress: () => console.log("pressed"), title: "Press me", ripple: true, rounded: true }),
+            React.createElement(OtpInput, { length: 5, onChange: (value) => console.log(value), boxStyle: { width: 50, height: 50 } }))));
 };
 export default ApppWrapper;

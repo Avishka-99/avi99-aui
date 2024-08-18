@@ -1,5 +1,5 @@
 import React from 'react';
-import { type ColorValue } from 'react-native';
+import { type ViewStyle, type ColorValue } from 'react-native';
 interface TextInputProps {
     placeholder: String;
     placeholderColor?: ColorValue;
@@ -8,6 +8,7 @@ interface TextInputProps {
     disabled?: Boolean;
     onChange: (text: String) => void;
     secured?: boolean;
+    containerStyle?: ViewStyle;
 }
 declare const _default: React.NamedExoticComponent<TextInputProps>;
 export default _default;

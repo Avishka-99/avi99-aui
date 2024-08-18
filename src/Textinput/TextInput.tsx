@@ -8,13 +8,15 @@ interface TextInputProps {
     disabled?: Boolean,
     onChange: (text: String) => void,
     secured?: boolean,
+    containerStyle?: ViewStyle;
 
 }
 
-const TextInput: React.FC<TextInputProps> = ({ placeholder, placeholderColor, textColor, outlineColor, disabled, onChange, secured }) => {
+const TextInput: React.FC<TextInputProps> = ({ placeholder, placeholderColor, textColor, outlineColor, disabled, onChange, secured, containerStyle }) => {
     const [hasValue, setHasValue] = useState<Boolean>(false);
     const inputRef = useRef<TextBox>(null);
     const translation = useRef(new Animated.Value(0)).current;
+    let backgroundStyle: ViewStyle = {};
     useEffect(() => {
         if (placeholder == undefined) {
             console.error('placeholder must be provided');
@@ -73,8 +75,11 @@ const TextInput: React.FC<TextInputProps> = ({ placeholder, placeholderColor, te
         zIndex: 1,
         pointerEvents: 'none',
     }
+    if (containerStyle) {
+        backgroundStyle = { ...backgroundStyle, ...containerStyle };
+    }
     return (
-        <View style={{ paddingTop: 10, backgroundColor: 'transparent' }}>
+        <View style={[{ paddingTop: 10, backgroundColor: 'transparent' }, backgroundStyle]}>
             <Animated.Text style={[{ fontWeight: '600' }, { color: placeholderColor ? placeholderColor : 'black' }, placeholderStyle]}>{placeholder}</Animated.Text>
             <TextBox style={[{ borderWidth: 1, padding: 13, borderRadius: 5, backgroundColor: 'white', color: textColor ? textColor : 'black', borderColor: outlineColor ? outlineColor : 'black' }]} onFocus={onFocus} onBlur={onBlur} ref={inputRef} onChangeText={setText} secureTextEntry={secured ? secured : false} editable={disabled ? false : true} selectTextOnFocus={disabled ? false : true} />
         </View>

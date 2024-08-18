@@ -1,13 +1,17 @@
 import React from 'react';
 import { View, type ColorValue, type ViewStyle } from 'react-native';
 interface SeperatorProps {
-    color?: ColorValue
+    color?: ColorValue;
+    containerStyle?: ViewStyle;
 }
-const Seperator: React.FC<SeperatorProps> = ({ color }) => {
-    let containerStyles: ViewStyle = {};
-    containerStyles = { ...containerStyles, backgroundColor: color ? color : 'rgb(202, 196, 208)' }
+const Seperator: React.FC<SeperatorProps> = ({ color, containerStyle }) => {
+    let backgroundStyle: ViewStyle = {};
+    backgroundStyle = { ...backgroundStyle, backgroundColor: color ? color : 'rgb(202, 196, 208)' }
+    if (containerStyle) {
+        backgroundStyle = { ...backgroundStyle, ...containerStyle };
+    }
     return (
-        <View style={[containerStyles, { width: '100%', height: 0.5 }]}>
+        <View style={[{ width: '100%', height: 0.5 }, backgroundStyle]}>
         </View>
     )
 }

@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Switch } from '@avi99/aui';
+import { Button } from 'react-native-paper';
+import { IconButton, Button as But, OtpInput } from '@avi99/aui';
 // function App() {
 //   // const sheetRef = React.useRef<SheetRef>(null);
 //   // const openSheet = () => {
@@ -244,6 +246,12 @@ const ApppWrapper = () => {
 
       <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
         <Switch value={value} onChange={() => setValue(!value)} />
+        <Button icon="camera" mode="contained" onPress={() => console.log('Pressed')} style={{ width: 160 }}>
+          Press me
+        </Button>
+        <IconButton icon='home' onPress={() => console.log("pressed")} title={"Press me"} rounded ripple />
+        <But mode='flat' onPress={() => console.log("pressed")} title={"Press me"} ripple rounded />
+        <OtpInput length={5} onChange={(value) => console.log(value)} boxStyle={{ width: 50, height: 50 }} />
       </View>
 
       {/* </PortalProvider> */}

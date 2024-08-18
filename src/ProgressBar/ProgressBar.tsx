@@ -1,14 +1,16 @@
 import React, { useRef, useEffect, memo, useState } from 'react';
-import { Animated, Easing, View, type ColorValue, type DimensionValue } from 'react-native';
+import { Animated, Easing, View, type ColorValue, type DimensionValue, type ViewStyle } from 'react-native';
 interface ProgressBarProps {
     value: number,
     color?: ColorValue,
     width?: DimensionValue,
     height?: DimensionValue,
+    containerStyle?: ViewStyle;
 }
-const ProgressBar: React.FC<ProgressBarProps> = ({ value, color, width, height }) => {
+const ProgressBar: React.FC<ProgressBarProps> = ({ value, color, width, height, containerStyle }) => {
     const progress = useRef(new Animated.Value(0)).current;
     const [containerHeight, setContainerHeight] = useState<number>(0);
+    let backgroundStyle: ViewStyle = {};
     useEffect(() => {
         if (typeof value !== 'number' || value < 0) {
             console.error('value is required and must be a number between 0 and 100.');
@@ -28,12 +30,15 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ value, color, width, height }
         }
 
     }, [value])
+    if (containerStyle) {
+        backgroundStyle = { ...backgroundStyle, ...containerStyle };
+    }
     return (
-        <View style={{
+        <View style={[{
             width: width ? width : '100%',
             height: height ? height : 8,
 
-        }}
+        }, backgroundStyle]}
             onLayout={({ nativeEvent: LayoutEvent }) => {
                 setContainerHeight(LayoutEvent.layout.height);
             }}>

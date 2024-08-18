@@ -6,13 +6,14 @@ interface BoxProps {
     index: number,
     length: number,
     active: boolean,
+    boxStyle?: ViewStyle;
 }
-const otpBoxStyles: ViewStyle = {
+let otpBoxStyles: ViewStyle = {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
 }
-const OtpBox: React.FC<BoxProps> = ({ digit, index, length, active }) => {
+const OtpBox: React.FC<BoxProps> = ({ digit, index, length, active, boxStyle }) => {
     const cursorOpacity = useRef(new Animated.Value(0)).current;
     Animated.parallel([
         Animated.loop(Animated.parallel([
@@ -26,9 +27,11 @@ const OtpBox: React.FC<BoxProps> = ({ digit, index, length, active }) => {
             )
         ]))
     ]).start()
-    //.start()
+    if (boxStyle) {
+        otpBoxStyles = { ...otpBoxStyles, ...boxStyle }
+    }
     return (
-        <View key={index} style={[otpBoxStyles, { height: 50, width: 50, borderColor: 'black', borderWidth: 2, borderRadius: 9, marginRight: (index == (length - 1)) ? 0 : 4 }]}>
+        <View key={index} style={[{ height: 50, width: 50, borderColor: 'black', borderWidth: 2, borderRadius: 9, marginRight: (index == (length - 1)) ? 0 : 4 }, otpBoxStyles]}>
             {active ? <Animated.Text style={{
                 fontSize: 30, opacity: cursorOpacity.interpolate({
                     inputRange: Array(3).fill(0).map((_, index) => index * 1),

@@ -1,25 +1,27 @@
 import React, { useState, useRef, memo, useEffect } from 'react';
-import { Pressable, Text, type ViewStyle, type TextStyle, type DimensionValue, View, type ColorValue, Animated } from 'react-native';
+import { Pressable, Text, type ViewStyle, type TextStyle, View, type ColorValue, Animated } from 'react-native';
+import { BUTTON_DEFAULT_HEIGHT } from '../utils/Constants';
 interface ButtonProps {
     mode: 'flat' | 'outlined' | 'text';
     onPress: () => void;
     title: String;
     color?: ColorValue;
-    width?: DimensionValue;
     outlineColor?: ColorValue;
     background?: ColorValue;
     rounded?: Boolean;
     ripple?: Boolean;
     rippleColor?: ColorValue;
+    containerStyle?: ViewStyle;
 }
 interface RippleTranslation {
     x: any,
     y: any,
 }
-const Button: React.FC<ButtonProps> = ({ mode, onPress, title, color, background, rounded, outlineColor, width, ripple, rippleColor }) => {
+const Button: React.FC<ButtonProps> = ({ mode, onPress, title, color, background, rounded, outlineColor, ripple, rippleColor, containerStyle }) => {
     let buttonStyle: ViewStyle = {};
     let titleStyle: TextStyle = {};
-    const ripple_ = useRef(new Animated.Value(0)).current
+    let backgroundStyle: ViewStyle = {};
+    const ripple_ = useRef(new Animated.Value(0)).current;
     useEffect(() => {
         if (mode == undefined) {
             console.error('mode must be provided');
@@ -50,29 +52,29 @@ const Button: React.FC<ButtonProps> = ({ mode, onPress, title, color, background
     switch (mode) {
         case 'flat':
             buttonStyle = {
-                ...buttonStyle, backgroundColor: background ? background : 'dodgerblue', borderWidth: 2, borderColor: outlineColor ? outlineColor : background ? background : 'dodgerblue', minWidth: width ? width : 0,
-                padding: 5
+                ...buttonStyle, backgroundColor: background ? background : 'dodgerblue', borderWidth: 2, borderColor: outlineColor ? outlineColor : background ? background : 'dodgerblue',
+                paddingLeft: 10, paddingRight: 10
 
             };
-            titleStyle = { color: color ? color : 'white' };
+            titleStyle = { color: color ? color : 'white', fontWeight: '700' };
             break;
         case 'outlined':
             buttonStyle = { ...buttonStyle, borderWidth: 3, borderColor: outlineColor ? outlineColor : 'royalblue', backgroundColor: background ? background : 'dodgerblue' };
-            titleStyle = { color: color ? color : 'white' };
+            titleStyle = { color: color ? color : 'white', fontWeight: '700' };
             break;
         case 'text':
-            titleStyle = { color: color ? color : 'white' };
+            titleStyle = { color: color ? color : 'white', fontWeight: '700' };
             break;
         default:
             buttonStyle = { backgroundColor: 'dodgerblue' };
             break;
     }
-    if (width) {
-        buttonStyle = { ...buttonStyle, width: width }
+    if (containerStyle) {
+        backgroundStyle = containerStyle;
     }
     if (!ripple) {
         return (
-            <Pressable style={[{ padding: 10, borderRadius: rounded ? 35 : 5, height: 38, display: 'flex', alignItems: 'center', justifyContent: 'center' }, buttonStyle]} onPress={onPress}>
+            <Pressable style={[{ borderRadius: rounded ? BUTTON_DEFAULT_HEIGHT : 5, height: BUTTON_DEFAULT_HEIGHT, display: 'flex', alignItems: 'center', justifyContent: 'center' }, buttonStyle, backgroundStyle]} onPress={onPress}>
                 <Text style={titleStyle} >{title}</Text>
             </Pressable>
         );
@@ -81,14 +83,14 @@ const Button: React.FC<ButtonProps> = ({ mode, onPress, title, color, background
             <Pressable style={
                 [
                     {
-                        padding: 10,
-                        borderRadius: rounded ? 35 : 5,
-                        height: 38,
+                        borderRadius: rounded ? BUTTON_DEFAULT_HEIGHT : 5,
+                        height: BUTTON_DEFAULT_HEIGHT,
                         overflow: 'hidden',
                         display: 'flex',
 
                     },
-                    buttonStyle
+                    buttonStyle,
+                    backgroundStyle
                 ]}
                 onPress={(event) => {
                     onPress();

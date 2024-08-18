@@ -48,18 +48,18 @@ export fuction App(){
 ```
 
 
-| Property     | Required | Type           | Description                                                                     |
-| -------------- | ---------- | ---------------- | --------------------------------------------------------------------------------- |
-| mode         | true     | String         | mode of the button. mode should be one of following  ('flat','outlined','text') |
-| onPress      | true     | Function       | this calls when user press the button                                           |
-| title        | true     | String         | button text                                                                     |
-| background   | false    | ColorValue     | background color for button.<br>default -> #1E90FF                              |
-| color        | false    | ColorValue     | button text color.<br>default -> #FFFFFF                                        |
-| outlineColor | false    | ColorValue     | button outline color.<br>default -> #4169E1                                     |
-| width        | false    | DimensionValue | width of button                                                                 |
-| rounded      | false    | Boolean        | if true, button corners will be rounded                                         |
-| ripple       | false    | Boolean        | enables ripple effect when user press the button                                |
-| rippleColor  | false    | ColorValue     | ripple color.                                                                   |
+| Property       | Required | Type       | Description                                                                     |
+| ---------------- | ---------- | ------------ | --------------------------------------------------------------------------------- |
+| mode           | true     | String     | mode of the button. mode should be one of following  ('flat','outlined','text') |
+| onPress        | true     | Function   | this calls when user press the button                                           |
+| title          | true     | String     | button text                                                                     |
+| background     | false    | ColorValue | background color for button.<br>default -> #1E90FF                              |
+| color          | false    | ColorValue | button text color.<br>default -> #FFFFFF                                        |
+| outlineColor   | false    | ColorValue | button outline color.<br>default -> #4169E1                                     |
+| containerStyle | false    | ViewStyle  | additional styling                                                              |
+| rounded        | false    | Boolean    | if true, button corners will be rounded                                         |
+| ripple         | false    | Boolean    | enables ripple effect when user press the button                                |
+| rippleColor    | false    | ColorValue | ripple color.                                                                   |
 
 ## Loader
 
@@ -99,11 +99,12 @@ export fuction App(){
 ```
 
 
-| Property | Required | Type       | Description                                    |
-| ---------- | ---------- | ------------ | ------------------------------------------------ |
-| value    | true     | Boolean    | current state of the button                    |
-| onChange | true     | Function   | triggers when user press the switch            |
-| color    | true     | ColorValue | background color of switch. default -> #1E90FF |
+| Property       | Required | Type       | Description                                    |
+| :--------------- | ---------- | ------------ | ------------------------------------------------ |
+| value          | true     | Boolean    | current state of the button                    |
+| onChange       | true     | Function   | triggers when user press the switch            |
+| color          | true     | ColorValue | background color of switch. default -> #1E90FF |
+| containerStyle | false    | ViewStyle  | additional styling                             |
 
 ## Seperator
 
@@ -119,9 +120,10 @@ export fuction App(){
 ```
 
 
-| Property | Required | Type       | Description                   |
-| :--------- | ---------- | ------------ | ------------------------------- |
-| color    | false    | ColorValue | background color of seperator |
+| Property       | Required | Type       | Description                   |
+| :--------------- | ---------- | ------------ | ------------------------------- |
+| color          | false    | ColorValue | background color of seperator |
+| containerStyle | fasle    | ViewStyle  | additional styling            |
 
 ## Progress Bar
 
@@ -137,12 +139,13 @@ export fuction App(){
 ```
 
 
-| Property | Required | Type           | Description                                              |
-| :--------- | ---------- | ---------------- | ---------------------------------------------------------- |
-| color    | false    | ColorValue     | background color of progress bar. default -> #5BC236     |
-| value    | true     | Number         | progress value. it should be in between 0 - 100          |
-| width    | false    | DimensionValue | width of progressbar. default -> '100%' of its container |
-| height   | false    | DimensionValue | height of progressbar. default -> 8                      |
+| Property       | Required | Type           | Description                                              |
+| :--------------- | ---------- | ---------------- | ---------------------------------------------------------- |
+| color          | false    | ColorValue     | background color of progress bar. default -> #5BC236     |
+| value          | true     | Number         | progress value. it should be in between 0 - 100          |
+| width          | false    | DimensionValue | width of progressbar. default -> '100%' of its container |
+| height         | false    | DimensionValue | height of progressbar. default -> 8                      |
+| containerStyle | false    | ViewStyle      | additional styling                                       |
 
 ## OTP Input
 
@@ -157,11 +160,13 @@ export fuction App(){
 ```
 
 
-| Property   | Required | Type     | Description                      |
-| ------------ | ---------- | ---------- | ---------------------------------- |
-| length     | true     | Number   | length of otp component          |
-| onComplete | false    | Function | triggers last digit entered      |
-| onChange   | true     | Function | triggers when digits are changed |
+| Property       | Required | Type      | Description                      |
+| ---------------- | ---------- | ----------- | ---------------------------------- |
+| length         | true     | Number    | length of otp component          |
+| onComplete     | false    | Function  | triggers last digit entered      |
+| onChange       | true     | Function  | triggers when digits are changed |
+| containerStyle | false    | ViewStyle | styling for OTP container        |
+| boxStyle       | false    | ViewStyle | styling for OTP box              |
 
 ## TextInput
 
@@ -182,14 +187,15 @@ export fuction App(){
 
 
 | Property         | Required | Type       | Description                                                            |
-| ------------------ | ---------- | ------------ | ------------------------------------------------------------------------ |
+| :----------------- | ---------- | ------------ | ------------------------------------------------------------------------ |
 | onChange         | true     | Function   | triggers when user input text                                          |
 | secured          | false    | Boolean    | is true, then entered text will be masked.<br /><br />default -> false |
 | textColor        | false    | ColorValue | color of entered text. default -> '#000000'                            |
 | outlineColor     | false    | ColorValue | border color of textbox. default -> '#000000'                          |
 | disabled         | false    | Boolean    | if true, the textinput is disabled                                     |
 | placeholder      | true     | String     | placeholder text                                                       |
-| placeholderColor | fasle    | ColorValue | color of placeholder text. default -> '#000000'                        |
+| placeholderColor | false    | ColorValue | color of placeholder text. default -> '#000000'                        |
+| containerStyle   | false    | ViewStyle  | additional styling                                                     |
 
 ## Bottomsheet
 
@@ -290,18 +296,18 @@ export function App(){
 ```
 
 
-| Property   | Required | Type           | Description                                                          |
-| ------------ | ---------- | ---------------- | ---------------------------------------------------------------------- |
-| onPress    | true     | Function       | triggers when button is pressed                                      |
-| title      | true     | String         | title text of the button                                             |
-| icon       | true     | String         | icon name                                                            |
-| color      | false    | ColorValue     | color of icon & title. default -> '#FFFFFF'                          |
-| width      | false    | DimensionValue | width of button                                                      |
-| background | false    | ColorValue     | background color of button. default -> '#1E90FF'                     |
-| outlined   | false    | Boolean        | if true, background -> '#FFFFFF'. only outline,icon,tile are visible |
-| reversed   | false    | Boolean        | if true, order of icon & title reversed                              |
-| ripple     | false    | Boolean        | enables ripple effect when user press the button                     |
-| rounded    | false    | Boolean        | if true, button corners will be rounded                              |
+| Property       | Required | Type       | Description                                                          |
+| ---------------- | ---------- | ------------ | ---------------------------------------------------------------------- |
+| onPress        | true     | Function   | triggers when button is pressed                                      |
+| title          | true     | String     | title text of the button                                             |
+| icon           | true     | String     | icon name                                                            |
+| color          | false    | ColorValue | color of icon & title. default -> '#FFFFFF'                          |
+| containerStyle | false    | ViewStyle  | additional styling                                                   |
+| background     | false    | ColorValue | background color of button. default -> '#1E90FF'                     |
+| outlined       | false    | Boolean    | if true, background -> '#FFFFFF'. only outline,icon,tile are visible |
+| reversed       | false    | Boolean    | if true, order of icon & title reversed                              |
+| ripple         | false    | Boolean    | enables ripple effect when user press the button                     |
+| rounded        | false    | Boolean    | if true, button corners will be rounded                              |
 
 ##
 

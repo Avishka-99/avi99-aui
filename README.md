@@ -50,15 +50,15 @@ export fuction App(){
 
 | Property       | Required | Type       | Description                                                                     |
 | ---------------- | ---------- | ------------ | --------------------------------------------------------------------------------- |
-| mode           | true     | String     | mode of the button. mode should be one of following  ('flat','outlined','text') |
+| mode           | true     | string     | mode of the button. mode should be one of following  ('flat','outlined','text') |
 | onPress        | true     | Function   | this calls when user press the button                                           |
-| title          | true     | String     | button text                                                                     |
+| title          | true     | string     | button text                                                                     |
 | background     | false    | ColorValue | background color for button.<br>default -> #1E90FF                              |
 | color          | false    | ColorValue | button text color.<br>default -> #FFFFFF                                        |
 | outlineColor   | false    | ColorValue | button outline color.<br>default -> #4169E1                                     |
 | containerStyle | false    | ViewStyle  | additional styling                                                              |
-| rounded        | false    | Boolean    | if true, button corners will be rounded                                         |
-| ripple         | false    | Boolean    | enables ripple effect when user press the button                                |
+| rounded        | false    | boolean    | if true, button corners will be rounded                                         |
+| ripple         | false    | boolean    | enables ripple effect when user press the button                                |
 | rippleColor    | false    | ColorValue | ripple color.                                                                   |
 
 ## Loader
@@ -79,7 +79,7 @@ export fuction App(){
 
 | Property | Required | Type       | Description                                                                                                                                                                                                                                                                                         |
 | :--------- | ---------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| name     | true     | String     | name of loader.it should be one of following<br />('6Dots','3Dots','curveSpin','triangle','dotGliding','fading-Box','4DotSquare','3DotScale','3DotBlinking','3DotSwap','3DotSway',<br />'3Rings','tinyCurve','2Curves','3Quarters','ringExpand',<br />'endlessSquares','spinningSquare','5DotWave') |
+| name     | true     | string     | name of loader.it should be one of following<br />('6Dots','3Dots','curveSpin','triangle','dotGliding','fading-Box','4DotSquare','3DotScale','3DotBlinking','3DotSwap','3DotSway',<br />'3Rings','tinyCurve','2Curves','3Quarters','ringExpand',<br />'endlessSquares','spinningSquare','5DotWave') |
 | duration | false    | Number     | duration of the animation. default value vary according to animation                                                                                                                                                                                                                                |
 | color    | false    | ColorValue | background color of loader. default -> #1E90FF                                                                                                                                                                                                                                                      |
 
@@ -91,7 +91,7 @@ import { Switch } from '@avi99/aui';
 export fuction App(){
     return (
         <Switch
-           onChange={(state: Boolean) => setValue(state)} 
+           onChange={(state: boolean) => setValue(state)} 
            value={value} 
         />
     )
@@ -101,7 +101,7 @@ export fuction App(){
 
 | Property       | Required | Type       | Description                                    |
 | :--------------- | ---------- | ------------ | ------------------------------------------------ |
-| value          | true     | Boolean    | current state of the button                    |
+| value          | true     | boolean    | current state of the button                    |
 | onChange       | true     | Function   | triggers when user press the switch            |
 | color          | true     | ColorValue | background color of switch. default -> #1E90FF |
 | containerStyle | false    | ViewStyle  | additional styling                             |
@@ -142,7 +142,7 @@ export fuction App(){
 | Property       | Required | Type           | Description                                              |
 | :--------------- | ---------- | ---------------- | ---------------------------------------------------------- |
 | color          | false    | ColorValue     | background color of progress bar. default -> #5BC236     |
-| value          | true     | Number         | progress value. it should be in between 0 - 100          |
+| value          | true     | number         | progress value. it should be in between 0 - 100          |
 | width          | false    | DimensionValue | width of progressbar. default -> '100%' of its container |
 | height         | false    | DimensionValue | height of progressbar. default -> 8                      |
 | containerStyle | false    | ViewStyle      | additional styling                                       |
@@ -154,7 +154,7 @@ import { OtpInput} from '@avi99/aui';
 
 export fuction App(){
    return(
-      <OtpInput length={5} onChange={(otp:String) => console.log(otp)} onComplete={(otp:String)=>console.log(otp)} />
+      <OtpInput length={5} onChange={(otp:string) => console.log(otp)} onComplete={(otp:string)=>console.log(otp)} />
    )
 }
 ```
@@ -162,7 +162,7 @@ export fuction App(){
 
 | Property       | Required | Type      | Description                      |
 | ---------------- | ---------- | ----------- | ---------------------------------- |
-| length         | true     | Number    | length of otp component          |
+| length         | true     | number    | length of otp component          |
 | onComplete     | false    | Function  | triggers last digit entered      |
 | onChange       | true     | Function  | triggers when digits are changed |
 | containerStyle | false    | ViewStyle | styling for OTP container        |
@@ -177,8 +177,9 @@ import { TextInput } from '@avi99/aui';
 export fuction App(){
    return(
       <TextInput 
-         onChange={(text:String)=>console.log(text)} 
+         onChange={(text:string)=>console.log(text)} 
          placeholder={'Enter password'} 
+         value={''}
          secured
       ></TextInput>
    )
@@ -189,13 +190,14 @@ export fuction App(){
 | Property         | Required | Type       | Description                                                            |
 | :----------------- | ---------- | ------------ | ------------------------------------------------------------------------ |
 | onChange         | true     | Function   | triggers when user input text                                          |
-| secured          | false    | Boolean    | is true, then entered text will be masked.<br /><br />default -> false |
+| secured          | false    | boolean    | is true, then entered text will be masked.<br /><br />default -> false |
 | textColor        | false    | ColorValue | color of entered text. default -> '#000000'                            |
 | outlineColor     | false    | ColorValue | border color of textbox. default -> '#000000'                          |
-| disabled         | false    | Boolean    | if true, the textinput is disabled                                     |
-| placeholder      | true     | String     | placeholder text                                                       |
+| disabled         | false    | boolean    | if true, the textinput is disabled                                     |
+| placeholder      | true     | string     | placeholder text                                                       |
 | placeholderColor | false    | ColorValue | color of placeholder text. default -> '#000000'                        |
 | containerStyle   | false    | ViewStyle  | additional styling                                                     |
+| value            | true     | string     | current value                                                          |
 
 ## Bottomsheet
 
@@ -278,7 +280,7 @@ function App(){
 
 | Property | Required | Type      | Description                                                 |
 | ---------- | ---------- | ----------- | ------------------------------------------------------------- |
-| name     | true     | String    | name for component that used to identify component uniquely |
+| name     | true     | string    | name for component that used to identify component uniquely |
 | children | true     | ReactNode | component that required to reloacate                        |
 
 ## IconButton
@@ -299,15 +301,15 @@ export function App(){
 | Property       | Required | Type       | Description                                                          |
 | ---------------- | ---------- | ------------ | ---------------------------------------------------------------------- |
 | onPress        | true     | Function   | triggers when button is pressed                                      |
-| title          | true     | String     | title text of the button                                             |
-| icon           | true     | String     | icon name                                                            |
+| title          | true     | string     | title text of the button                                             |
+| icon           | true     | string     | icon name                                                            |
 | color          | false    | ColorValue | color of icon & title. default -> '#FFFFFF'                          |
 | containerStyle | false    | ViewStyle  | additional styling                                                   |
 | background     | false    | ColorValue | background color of button. default -> '#1E90FF'                     |
-| outlined       | false    | Boolean    | if true, background -> '#FFFFFF'. only outline,icon,tile are visible |
-| reversed       | false    | Boolean    | if true, order of icon & title reversed                              |
-| ripple         | false    | Boolean    | enables ripple effect when user press the button                     |
-| rounded        | false    | Boolean    | if true, button corners will be rounded                              |
+| outlined       | false    | boolean    | if true, background -> '#FFFFFF'. only outline,icon,tile are visible |
+| reversed       | false    | boolean    | if true, order of icon & title reversed                              |
+| ripple         | false    | boolean    | enables ripple effect when user press the button                     |
+| rounded        | false    | boolean    | if true, button corners will be rounded                              |
 
 ##
 

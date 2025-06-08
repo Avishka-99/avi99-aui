@@ -1,4 +1,14 @@
 {
-  "extends": "./tsconfig",
-  "exclude": ["example"]
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "./src",
+    "declaration": true,
+    "declarationDir": "dist/types",
+    "emitDeclarationOnly": false,         // ✅ JS + types
+    "module": "esnext",
+    "target": "esnext",
+    "jsx": "react"
+  },
+  "include": ["src"]
 }

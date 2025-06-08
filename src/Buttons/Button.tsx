@@ -4,12 +4,12 @@ import { BUTTON_DEFAULT_HEIGHT } from '../utils/Constants';
 interface ButtonProps {
     mode: 'flat' | 'outlined' | 'text';
     onPress: () => void;
-    title: String;
+    title: string;
     color?: ColorValue;
     outlineColor?: ColorValue;
     background?: ColorValue;
-    rounded?: Boolean;
-    ripple?: Boolean;
+    rounded?: boolean;
+    ripple?: boolean;
     rippleColor?: ColorValue;
     containerStyle?: ViewStyle;
 }
@@ -59,8 +59,8 @@ const Button: React.FC<ButtonProps> = ({ mode, onPress, title, color, background
             titleStyle = { color: color ? color : 'white', fontWeight: '700' };
             break;
         case 'outlined':
-            buttonStyle = { ...buttonStyle, borderWidth: 3, borderColor: outlineColor ? outlineColor : 'royalblue', backgroundColor: background ? background : 'dodgerblue' };
-            titleStyle = { color: color ? color : 'white', fontWeight: '700' };
+            buttonStyle = { ...buttonStyle, borderWidth: 3, borderColor: outlineColor ? outlineColor : 'royalblue', backgroundColor: background ? background : 'white' };
+            titleStyle = { color: color ? color : 'black', fontWeight: '700' };
             break;
         case 'text':
             titleStyle = { color: color ? color : 'white', fontWeight: '700' };

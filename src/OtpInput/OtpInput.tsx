@@ -3,8 +3,8 @@ import { Pressable, View, TextInput, type ViewStyle } from 'react-native';
 import OtpBox from './OtpBox';
 interface OtpProps {
     length: number,
-    onChange: (text: String) => void,
-    onComplete?: (text: String) => void,
+    onChange: (text: string) => void,
+    onComplete?: (text: string) => void,
     containerStyle?: ViewStyle;
     boxStyle?: ViewStyle;
 }

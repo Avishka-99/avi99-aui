@@ -1,8 +1,8 @@
 import React from 'react';
 import { type ViewStyle } from 'react-native';
 interface SwitchProps {
-    value: Boolean;
-    onChange: (value: Boolean) => void;
+    value: boolean;
+    onChange: (value: boolean) => void;
     color?: string;
     containerStyle?: ViewStyle;
 }

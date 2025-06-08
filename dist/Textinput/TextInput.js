@@ -1,23 +1,10 @@
-import React, { useState, useRef, memo, useEffect } from 'react'
-import { TextInput as TextBox, View, Animated, type ViewStyle, type ColorValue, Easing } from 'react-native'
-interface TextInputProps {
-    placeholder: string,
-    placeholderColor?: ColorValue,
-    textColor?: ColorValue,
-    outlineColor?: ColorValue,
-    disabled?: boolean,
-    onChange: (text: string) => void,
-    secured?: boolean,
-    containerStyle?: ViewStyle;
-    value: string;
-
-}
-
-const TextInput: React.FC<TextInputProps> = ({ placeholder, placeholderColor, textColor, outlineColor, disabled, onChange, secured, containerStyle, value }) => {
-    const [hasValue, setHasValue] = useState<boolean>(false);
-    const inputRef = useRef<TextBox>(null);
+import React, { useState, useRef, memo, useEffect } from 'react';
+import { TextInput as TextBox, View, Animated, Easing } from 'react-native';
+const TextInput = ({ placeholder, placeholderColor, textColor, outlineColor, disabled, onChange, secured, containerStyle, value }) => {
+    const [hasValue, setHasValue] = useState(false);
+    const inputRef = useRef(null);
     const translation = useRef(new Animated.Value(0)).current;
-    let backgroundStyle: ViewStyle = {};
+    let backgroundStyle = {};
     useEffect(() => {
         if (placeholder == undefined) {
             console.error('placeholder must be provided');
@@ -35,7 +22,7 @@ const TextInput: React.FC<TextInputProps> = ({ placeholder, placeholderColor, te
             console.error('onChange should be a function');
             return;
         }
-    }, [])
+    }, []);
     const onFocus = () => {
         Animated.timing(translation, {
             toValue: 1,
@@ -43,7 +30,7 @@ const TextInput: React.FC<TextInputProps> = ({ placeholder, placeholderColor, te
             easing: Easing.ease,
             useNativeDriver: true,
         }).start();
-    }
+    };
     const onBlur = () => {
         if (!hasValue) {
             Animated.timing(translation, {
@@ -53,21 +40,22 @@ const TextInput: React.FC<TextInputProps> = ({ placeholder, placeholderColor, te
                 useNativeDriver: true
             }).start();
         }
-    }
+    };
     const translateYInterpolate = translation.interpolate({
         inputRange: [0, 1],
         outputRange: [0, -21.3]
     });
-    const setText = (text: string) => {
+    const setText = (text) => {
         if (text.length > 0) {
             setHasValue(true);
             onChange(text);
-        } else {
+        }
+        else {
             setHasValue(false);
             onChange(text);
         }
-    }
-    const placeholderStyle: ViewStyle = {
+    };
+    const placeholderStyle = {
         position: 'absolute',
         top: 24,
         left: 15,
@@ -75,17 +63,12 @@ const TextInput: React.FC<TextInputProps> = ({ placeholder, placeholderColor, te
         backgroundColor: 'white',
         zIndex: 1,
         pointerEvents: 'none',
-    }
+    };
     if (containerStyle) {
         backgroundStyle = { ...backgroundStyle, ...containerStyle };
     }
-    return (
-        <View style={[{ paddingTop: 10, backgroundColor: 'transparent' }, backgroundStyle]}>
-            <Animated.Text style={[{ fontWeight: '600' }, { color: placeholderColor ? placeholderColor : 'black' }, placeholderStyle]}>{placeholder}</Animated.Text>
-            <TextBox value={value} style={[{ borderWidth: 1, padding: 13, borderRadius: 5, backgroundColor: 'white', color: textColor ? textColor : 'black', borderColor: outlineColor ? outlineColor : 'black' }]} onFocus={onFocus} onBlur={onBlur} ref={inputRef} onChangeText={setText} secureTextEntry={secured ? secured : false} editable={disabled ? false : true} selectTextOnFocus={disabled ? false : true} />
-        </View>
-
-    )
-}
-
-export default memo(TextInput)
+    return (React.createElement(View, { style: [{ paddingTop: 10, backgroundColor: 'transparent' }, backgroundStyle] },
+        React.createElement(Animated.Text, { style: [{ fontWeight: '600' }, { color: placeholderColor ? placeholderColor : 'black' }, placeholderStyle] }, placeholder),
+        React.createElement(TextBox, { value: value, style: [{ borderWidth: 1, padding: 13, borderRadius: 5, backgroundColor: 'white', color: textColor ? textColor : 'black', borderColor: outlineColor ? outlineColor : 'black' }], onFocus: onFocus, onBlur: onBlur, ref: inputRef, onChangeText: setText, secureTextEntry: secured ? secured : false, editable: disabled ? false : true, selectTextOnFocus: disabled ? false : true })));
+};
+export default memo(TextInput);

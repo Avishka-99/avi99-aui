@@ -2,9 +2,9 @@
   "name": "@avi99/aui",
   "version": "0.1.5",
   "description": "A minimal ui library for react native",
-  "main": "lib/commonjs/index",
-  "module": "lib/module/index",
-  "types": "lib/typescript/src/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/types/index.d.ts",
   "react-native": "src/index",
   "source": "src/index",
   "files": [
@@ -31,7 +31,8 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "clean": "del-cli lib",
-    "release": "release-it"
+    "release": "release-it",
+    "build" : "npm run clean && tsc -p tsconfig.build.json"
   },
   "keywords": [
     "react-native",

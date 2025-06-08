@@ -3,12 +3,12 @@ import { type ViewStyle, type ColorValue } from 'react-native';
 interface ButtonProps {
     mode: 'flat' | 'outlined' | 'text';
     onPress: () => void;
-    title: String;
+    title: string;
     color?: ColorValue;
     outlineColor?: ColorValue;
     background?: ColorValue;
-    rounded?: Boolean;
-    ripple?: Boolean;
+    rounded?: boolean;
+    ripple?: boolean;
     rippleColor?: ColorValue;
     containerStyle?: ViewStyle;
 }

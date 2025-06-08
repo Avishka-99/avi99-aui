@@ -1,14 +1,15 @@
 import React, { useRef, useEffect, memo, useState } from 'react';
 import { Animated, Easing, Pressable, type ViewStyle } from 'react-native';
 interface SwitchProps {
-    value: Boolean,
-    onChange: (value: Boolean) => void,
+    value: boolean,
+    onChange: (value: boolean) => void,
     color?: string,
     containerStyle?: ViewStyle;
 }
 const Switch: React.FC<SwitchProps> = ({ value, onChange, color, containerStyle }) => {
     const toggle = useRef(new Animated.Value(0)).current
-    const [isToggle, setIsToggle] = useState<Boolean>(false);
+    const currentValue = useRef(0);
+    const [isToggle, setIsToggle] = useState<boolean>(false);
     let backgroundStyle: ViewStyle = {};
     useEffect(() => {
         if (value == undefined) {
@@ -20,11 +21,17 @@ const Switch: React.FC<SwitchProps> = ({ value, onChange, color, containerStyle 
             return;
         }
         toggle.setValue(value ? 1 : 0);
+        currentValue.current = value ? 1 : 0;
         setIsToggle(value);
     }, [])
     const movetoggle = () => {
+        if (currentValue.current === 0) {
+            currentValue.current = 1;
+        } else {
+            currentValue.current = 0;
+        }
         setIsToggle((prevState) => !prevState);
-        onChange(isToggle);
+        onChange(currentValue.current === 1);
         Animated.parallel(
             [Animated.timing(toggle, {
                 toValue: isToggle ? 0 : 1,

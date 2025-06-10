@@ -28,7 +28,7 @@
     react-native-web "^0.20.0"
 
 "@avi99/aui@file:":
-  version "0.1.7"
+  version "0.1.8"
   resolved "file:"
   dependencies:
     "@avi99/aui" "file:"
